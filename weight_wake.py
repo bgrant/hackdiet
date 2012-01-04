@@ -22,7 +22,7 @@ def plot_data(start=0, floaters=True):
 
     wakeup_goal = 7
     window = 20 # days
-    fig, axs = plt.subplots(nrows=3, ncols=2, sharex=True)
+    fig, axs = plt.subplots(nrows=3, sharex=True)
     axs[0].set_title('Life Data')
 
     # Wakeup-time plot
@@ -39,7 +39,6 @@ def plot_data(start=0, floaters=True):
         axs[2].axhline(5, color='r')
     axs[2].set_ylim((0,24))
     axs[2].set_yticks(arange(1,24,3))
-#    axs[2].set_yticklabels(map(lambda t: '%02d:00'%(t,), arange(1,24,3)))
     axs[2].set_yticklabels(map(lambda t: '%02d'%(t,), arange(1,24,3)))
     axs[2].set_ylabel('Wake Time')
 

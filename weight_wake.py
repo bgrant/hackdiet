@@ -72,3 +72,8 @@ def plot_data(start=0, floaters=True):
         ax.tick_params(axis='y', labelleft='on', labelright='on')
 
     plt.show()
+#
+#
+#def summarize(start=0):
+#    data = read_data()
+#    return data[start:].describe()

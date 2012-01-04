@@ -30,10 +30,9 @@ def plot_data(start=0, floaters=True):
 
     # Wakeup-time plot
     wake_delta = data.Wake - wakeup_goal
-    wake_errs = [wake_delta, zeros(len(wake_delta))]
     if floaters:
         axs[2].errorbar(data.index[start:], data.Wake[start:],
-                wake_errs[start:],
+                [wake_delta[start:], zeros(len(data.index))[start:]],
                 ecolor='g', capsize=0, fmt=None)
         axs[2].axhline(7, color='r')
     else:
@@ -49,10 +48,9 @@ def plot_data(start=0, floaters=True):
     # Weight plot
     weight_avg = ewma(data.Weight, window)
     weight_delta = data.Weight - weight_avg
-    weight_errs = [weight_delta, zeros(len(weight_delta))]
     if floaters:
         axs[0].errorbar(data.index[start:], data.Weight[start:],
-                weight_errs[start:],
+                [weight_delta[start:], zeros(len(data.index))[start:]],
                 ecolor='g', capsize=0, fmt=None)
     else:
         data.Weight[start:].plot(ax=axs[0], style='k,')
@@ -62,9 +60,9 @@ def plot_data(start=0, floaters=True):
     # Body fat plot
     bf_avg = ewma(data.BF, window)
     bf_delta = data.BF - bf_avg
-    bf_errs = [bf_delta, zeros(len(bf_delta))]
     if floaters:
-        axs[1].errorbar(data.index[start:], data.BF[start:], bf_errs[start:],
+        axs[1].errorbar(data.index[start:], data.BF[start:], 
+                [bf_delta[start:], zeros(len(data.index))[start:]],
                 ecolor='g', capsize=0, fmt=None)
     else:
         data.BF[start:].plot(ax=axs[1], style='k,')

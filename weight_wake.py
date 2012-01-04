@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from numpy import NaN, arange, zeros
 from pandas import *
 
+
 def convert_time_string(timestring):
     if timestring == 'NA':
         rval = NaN
@@ -12,9 +13,11 @@ def convert_time_string(timestring):
         rval = hour + minute/60
     return rval
 
+
 def read_data(filename='weight.tsv'):
     return read_table(filename, header=1, index_col=0, parse_dates=True,
             converters={'Wake': convert_time_string})
+
 
 def plot_data(start=0, floaters=True):
     plt.close('all')
@@ -41,6 +44,7 @@ def plot_data(start=0, floaters=True):
     axs[2].set_yticks(arange(1,24,3))
     axs[2].set_yticklabels(map(lambda t: '%02d'%(t,), arange(1,24,3)))
     axs[2].set_ylabel('Wake Time')
+    axs[2].grid(axis='both')
 
     # Weight plot
     weight_avg = ewma(data.Weight, window)

@@ -19,7 +19,7 @@ def read_data(filename='weight.tsv'):
             converters={'Wake': convert_time_string})
 
 
-def show_data(start=0, floaters=True):
+def show_data(start=0, floatstyle=None, nofloatstyle='k,', floaters=True):
     plt.close('all')
     data = read_data()
 
@@ -32,10 +32,10 @@ def show_data(start=0, floaters=True):
     if floaters:
         axs[2].errorbar(data.index[start:], data.Wake[start:],
                 [wake_delta[start:], zeros(len(data.index))[start:]],
-                ecolor='g', capsize=0, fmt=None)
+                ecolor='g', capsize=0, fmt=floatstyle)
         axs[2].axhline(7, color='r')
     else:
-        data.Wake[start:].plot(ax=axs[2], style='k,')
+        data.Wake[start:].plot(ax=axs[2], style=nofloatstyle)
         axs[2].axhline(8, color='r')
         axs[2].axhline(5, color='r')
     axs[2].set_ylim((0,24))
@@ -50,9 +50,9 @@ def show_data(start=0, floaters=True):
     if floaters:
         axs[0].errorbar(data.index[start:], data.Weight[start:],
                 [weight_delta[start:], zeros(len(data.index))[start:]],
-                ecolor='g', capsize=0, fmt=None)
+                ecolor='g', capsize=0, fmt=floatstyle)
     else:
-        data.Weight[start:].plot(ax=axs[0], style='k,')
+        data.Weight[start:].plot(ax=axs[0], style=nofloatstyle)
     weight_avg[start:].plot(ax=axs[0])
     axs[0].set_ylabel('Weight')
     
@@ -62,9 +62,9 @@ def show_data(start=0, floaters=True):
     if floaters:
         axs[1].errorbar(data.index[start:], data.BF[start:], 
                 [bf_delta[start:], zeros(len(data.index))[start:]],
-                ecolor='g', capsize=0, fmt=None)
+                ecolor='g', capsize=0, fmt=floatstyle)
     else:
-        data.BF[start:].plot(ax=axs[1], style='k,')
+        data.BF[start:].plot(ax=axs[1], style=nofloatstyle)
     bf_avg[start:].plot(ax=axs[1])
     axs[1].set_ylabel('% Body Fat')
 

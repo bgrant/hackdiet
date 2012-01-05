@@ -19,14 +19,13 @@ def read_data(filename='weight.tsv'):
             converters={'Wake': convert_time_string})
 
 
-def plot_data(start=0, floaters=True):
+def show_data(start=0, floaters=True):
     plt.close('all')
     data = read_data()
 
     wakeup_goal = 7
     window = 20 # days
     fig, axs = plt.subplots(nrows=3, sharex=True)
-    axs[0].set_title('Life Data')
 
     # Wakeup-time plot
     wake_delta = data.Wake - wakeup_goal
@@ -68,6 +67,12 @@ def plot_data(start=0, floaters=True):
         data.BF[start:].plot(ax=axs[1], style='k,')
     bf_avg[start:].plot(ax=axs[1])
     axs[1].set_ylabel('% Body Fat')
+
+    axs[0].set_title('Life Data')
+    fig.text(0.5, 0.05, 'wt: %.1f  bf: %.1f'%(weight_avg[-1], bf_avg[-1]),
+            horizontalalignment='center', verticalalignment='bottom')
+    #print "Weight est: %4.1f lbs"%(weight_avg[-1],)
+    #print "    BF est: %4.1f%%"%(bf_avg[-1],)
 
     for ax in axs:
         ax.tick_params(axis='y', labelleft='on', labelright='on')

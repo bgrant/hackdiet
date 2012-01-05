@@ -19,7 +19,7 @@ def read_data(filename='weight.tsv'):
             converters={'Wake': convert_time_string})
 
 
-def show_data(start=0, floatstyle=None, nofloatstyle='k,', floaters=True):
+def show_data(start=0, floatstyle='.', nofloatstyle='k,', floaters=True):
     plt.close('all')
     data = read_data()
 
@@ -69,7 +69,7 @@ def show_data(start=0, floatstyle=None, nofloatstyle='k,', floaters=True):
     axs[1].set_ylabel('% Body Fat')
 
     axs[0].set_title('Life Data')
-    fig.text(0.5, 0.05, 'wt: %.1f  bf: %.1f'%(weight_avg[-1], bf_avg[-1]),
+    fig.text(0.5, 0.05, 'wt: %.1f    bf: %.1f'%(weight_avg[-1], bf_avg[-1]),
             horizontalalignment='center', verticalalignment='bottom')
     #print "Weight est: %4.1f lbs"%(weight_avg[-1],)
     #print "    BF est: %4.1f%%"%(bf_avg[-1],)

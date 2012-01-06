@@ -1,5 +1,8 @@
+#!/usr/bin/env python
+
 from __future__ import division
 
+import sys
 import matplotlib.pyplot as plt
 from numpy import NaN, arange, zeros
 from pandas import *
@@ -55,12 +58,12 @@ def show_data(start=0, floatstyle='.', nofloatstyle='k,', floaters=True):
         data.Weight[start:].plot(ax=axs[0], style=nofloatstyle)
     weight_avg[start:].plot(ax=axs[0])
     axs[0].set_ylabel('Weight')
-    
+
     # Body fat plot
     bf_avg = ewma(data.BF, window)
     bf_delta = data.BF - bf_avg
     if floaters:
-        axs[1].errorbar(data.index[start:], data.BF[start:], 
+        axs[1].errorbar(data.index[start:], data.BF[start:],
                 [bf_delta[start:], zeros(len(data.index))[start:]],
                 ecolor='g', capsize=0, fmt=floatstyle)
     else:
@@ -83,3 +86,17 @@ def show_data(start=0, floatstyle='.', nofloatstyle='k,', floaters=True):
 def summarize(start=0):
     data = read_data()
     return data[start:].describe()
+
+
+if __name__ == '__main__':
+    if len(sys.argv) > 1:
+        start = int(sys.argv[1])
+    else:
+        start = 0
+
+    if start is 0:
+        floatstyle = None
+    else:
+        floatstyle = '.'
+
+    show_data(start, floatstyle=floatstyle)

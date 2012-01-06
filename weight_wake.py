@@ -22,9 +22,10 @@ def read_data(filename='weight.tsv'):
             converters={'Wake': convert_time_string})
 
 
-def show_data(start=0, floatstyle='.', nofloatstyle='k,', floaters=True):
+def show_data(start=0, floatstyle='.', nofloatstyle='k,', floaters=True,
+        path='/Users/bgrant/documents/life/data/weight-wake/weight.tsv'):
     plt.close('all')
-    data = read_data()
+    data = read_data(path)
 
     wakeup_goal = 7
     window = 20 # days

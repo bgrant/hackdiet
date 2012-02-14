@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
 """
+hackdiet.py: Weight, Body-fat, and Wakeup-time plotting inspired by the
+Hacker's Diet online by John Walker.
+
 :author: Robert David Grant <robert.david.grant@gmail.com>
 
 :copyright:

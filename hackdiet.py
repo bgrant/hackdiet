@@ -31,6 +31,7 @@ DATAPATH = './data.tsv'
 
 
 def convert_time_string(timestring):
+    """Parse a time value from the data file."""
     if timestring == 'NA':
         rval = NaN
     else:
@@ -39,19 +40,32 @@ def convert_time_string(timestring):
     return rval
 
 
-def read_data(filename='weight.tsv'):
-    return read_table(filename, header=1, index_col=0, parse_dates=True,
+def read_data(path=DATAPATH):
+    """Parse the data."""
+    return read_table(path, header=1, index_col=0, parse_dates=True,
             converters={'Wake': convert_time_string})
 
 
-def show_data(start=0, floatstyle='.', nofloatstyle='k,', floaters=True,
-        path=DATAPATH):
-    plt.close('all')
-    data = read_data(path)
+def show_data(start=0, path=DATAPATH, floaters=True, floatstyle='.',
+        nofloatstyle='k,'):
+    """Plot the data.
 
-    wakeup_goal = 7
-    window = 20 # days
+    `start`   : Integer offset from beginning of data (in days) to allow
+                plotting only recent data.  If negative, works as an offset
+                from end of data.
+    `path`    : Path to the tab-separated value file containing the data.
+    `floaters`: Boolean indicating whether you want 'floaters and sinkers'
+                plotted like in the original Hacker's Diet online.
+    `floatstyle`: If floaters are used, pass this style parameter to
+                matplotlib.
+    `nofloatstyle`: If floaters are not used, pass this style parameter to
+                matplotlib.
+    """
+    wakeup_goal = 7  # reference line in Wakeup-time plot
+    window = 20 # ndays in exponentially-weighted moving average
     fig, axs = plt.subplots(nrows=3, sharex=True)
+
+    data = read_data(path)
 
     # Wakeup-time plot
     wake_delta = data.Wake - wakeup_goal
@@ -107,11 +121,14 @@ def show_data(start=0, floatstyle='.', nofloatstyle='k,', floaters=True,
 
 
 def summarize(start=0):
+    """Return the pandas summary of the data."""
     data = read_data()
     return data[start:].describe()
 
 
-# Simple command-line interface
+# Simple command-line interface.  Interprets a single command-line argument as
+# an offset for the range of data to be plotted.  If plotting all the data it
+# doesn't use floaters (it looks too cluttered).  Else, it does.
 if __name__ == '__main__':
     if len(sys.argv) > 1:
         start = int(sys.argv[1])

@@ -1,5 +1,8 @@
 HACKDIET - In R and Python
 ========
+
+Summary
+-------
 This project contains some fairly simple data plotting functions
 inspired by the Hacker's Diet online by John Walker:
 
@@ -31,13 +34,15 @@ Walker's exponentially-weighted-moving-average and floaters-and-sinkers
 techniques, while the R version uses plotting methods more natural to
 ggplot2.  The R version also has a function for plotting the
 distribution of "day lengths", or the differences between your
-subsequent wakeup-times.  For specific functionality and usage, check
-out the comments in the files or send me a message on github.
+subsequent wakeup-times.
 
+Requirements
+------------
 `hackdiet.py` requires `numpy`, `matplotlib`, and `pandas`, and
 `hackdiet.R` requires ggplot2.
 
-My functions assume a data file called `data.tsv` of the form::
+My functions assume a data file (by default called `data.tsv`) of the
+form::
 
   # vim: noexpandtab : tabstop=15 : shiftwidth=10
   Date	Weight	BF	Wake
@@ -49,10 +54,32 @@ My functions assume a data file called `data.tsv` of the form::
   2009-07-23	NA	22.3	11:45
   2009-07-24	165.8	22.1	11:20
 
+The first line is not parsed.  Each column is separated by tabs.  If
+you're missing a data point, put an 'NA' in that spot, and pandas and
+ggplot2 will generally handle it.
 
-They are easily alterable to point to your own file.  Each column is
-separated by tabs, and the first two lines are not parsed.  If you're
-missing some data, put an 'NA' in that spot, and pandas and ggplot2 will
-generally handle it.
+Basic Usage
+-----------
+I usually run these files from their respective REPLs (I like RStudio
+and ipython).  The top-level functions in `hackdiet.R` are
+`plot.daylength` and `plot.data`.  In `hackdiet.py`, they are
+`show_data` and `summarize`.
+
+The python version has a basic command line interface
+that interprets a single command-line argument as an offset for the
+range of data to be plotted.  E.g.
+
+>>> ./hackdiet.py -30
+
+plots data for the last 30 days.
+
+>>> ./hackdiet.py 360
+
+plots all data except for the first 360 days.  If plotting all the data
+it doesn't put points on the floaters (it looks too cluttered).  Else,
+it does.
+
+For specific functionality and usage, check out the comments and
+docstrings in the files or send me a message on github.
 
 Happy hacking.

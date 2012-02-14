@@ -129,12 +129,25 @@ def summarize(start=0):
     return data[start:].describe()
 
 
-# Simple command-line interface.  Interprets a single command-line argument as
-# an offset for the range of data to be plotted.  If plotting all the data it
-# doesn't use floaters (it looks too cluttered).  Else, it does.
-if __name__ == '__main__':
-    if len(sys.argv) > 1:
-        start = int(sys.argv[1])
+def cli(argv):
+    """
+    Simple command-line interface.  Interprets a single command-line
+    argument as an offset for the range of data to be plotted.  E.g.
+
+    >>> ./hackdiet.py -30
+
+    plots data for the last 30 days.
+
+    >>> ./hackdiet.py 360
+
+    plots all data except for the first 360 days.  If plotting all the
+    data it doesn't put points on the floaters (it looks too cluttered).
+    Else, it does.
+
+    TODO: Rewrite with argparse
+    """
+    if len(argv) > 1:
+        start = int(argv[1])
     else:
         start = 0
 
@@ -144,3 +157,7 @@ if __name__ == '__main__':
         floatstyle = '.'
 
     show_data(start, floatstyle=floatstyle)
+
+
+if __name__ == '__main__':
+    cli(sys.argv)

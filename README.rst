@@ -39,19 +39,20 @@ out the comments in the files or send me a message on github.
 
 My functions assume a data file called `data.tsv` of the form::
 
-# vim: noexpandtab : tabstop=15 : shiftwidth=10
-Date	Weight	BF	Wake
-2009-07-18	169.8	22.6	09:01
-2009-07-19	172.4	23.5	14:31
-2009-07-20	170.2	23.2	14:38
-2009-07-21	NA	NA	NA
-2009-07-22	170.6	23.5	12:00
-2009-07-23	NA	22.3	11:45
-2009-07-24	165.8	22.1	11:20
+  # vim: noexpandtab : tabstop=15 : shiftwidth=10
+  Date	Weight	BF	Wake
+  2009-07-18	169.8	22.6	09:01
+  2009-07-19	172.4	23.5	14:31
+  2009-07-20	170.2	23.2	14:38
+  2009-07-21	NA	NA	NA
+  2009-07-22	170.6	23.5	12:00
+  2009-07-23	NA	22.3	11:45
+  2009-07-24	165.8	22.1	11:20
 
 
-Each column is separated by tabs, and the first two lines are not
-parsed.  If you're missing some data, put an 'NA' in that spot, and
-pandas and ggplot2 will generally handle it.
+They are easily alterable to point to your own file.  Each column is
+separated by tabs, and the first two lines are not parsed.  If you're
+missing some data, put an 'NA' in that spot, and pandas and ggplot2 will
+generally handle it.
 
 Happy hacking.

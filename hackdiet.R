@@ -1,5 +1,5 @@
 require(ggplot2)
-setwd("~/documents/life/data")
+setwd("~/documents/life/data/weight-wake")
 
 
 ######### data conversion functions ##########
@@ -21,7 +21,7 @@ convert.time <- function(time.lst) {
 ######### interactive functions ##########
 
 read.data <- function(file="weight.tsv") {
-    wt <- read.delim(file, header=TRUE, 
+    wt <- read.delim(file, header=TRUE, skip=1,
                      colClasses=c('Date', 'numeric', 'numeric', 'character'))
     wt$Day.Length <- c(NA, diff(convert.datetime(wt$Date, wt$Wake)))
     wt$Wake <- convert.time(wt$Wake)

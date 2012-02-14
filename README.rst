@@ -29,8 +29,10 @@ The main output of both files is a three-paneled plot, plotting Weight,
 % Body Fat, and Wakeup-time by Date.  The python version duplicates
 Walker's exponentially-weighted-moving-average and floaters-and-sinkers
 techniques, while the R version uses plotting methods more natural to
-ggplot2.  For specific functionality and usage, check out the comments
-in the files or send me a message on github.
+ggplot2.  The R version also has a function for plotting the
+distribution of "day lengths", or the differences between your
+subsequent wakeup-times.  For specific functionality and usage, check
+out the comments in the files or send me a message on github.
 
 `hackdiet.py` requires `numpy`, `matplotlib`, and `pandas`, and
 `hackdiet.R` requires ggplot2.
@@ -42,13 +44,14 @@ Date	Weight	BF	Wake
 2009-07-18	169.8	22.6	09:01
 2009-07-19	172.4	23.5	14:31
 2009-07-20	170.2	23.2	14:38
-2009-07-21	169.8	22.8	08:28
+2009-07-21	NA	NA	NA
 2009-07-22	170.6	23.5	12:00
-2009-07-23	166.4	22.3	11:45
+2009-07-23	NA	22.3	11:45
 2009-07-24	165.8	22.1	11:20
 
 
 Each column is separated by tabs, and the first two lines are not
-parsed.
+parsed.  If you're missing some data, put an 'NA' in that spot, and
+pandas and ggplot2 will generally handle it.
 
 Happy hacking.

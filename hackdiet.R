@@ -1,6 +1,7 @@
 require(ggplot2)
-setwd("~/documents/life/data/weight-wake")
+setwd("~/documents/life/data/hackdiet")
 
+DATAFILE <- "data.tsv"
 
 ######### data conversion functions ##########
 
@@ -20,7 +21,7 @@ convert.time <- function(time.lst) {
 
 ######### interactive functions ##########
 
-read.data <- function(file="weight.tsv") {
+read.data <- function(file=DATAFILE) {
     wt <- read.delim(file, header=TRUE, skip=1,
                      colClasses=c('Date', 'numeric', 'numeric', 'character'))
     wt$Day.Length <- c(NA, diff(convert.datetime(wt$Date, wt$Wake)))
@@ -59,7 +60,7 @@ plot.mywake <- function(since="1900-01-01", data=wt) {
 }
 
 plot.daylength <- function(since="1900-01-01", data=wt) {
-    wt <- read.data(file="weight.tsv")
+    wt <- read.data(file=DATAFILE)
     sub.wt <- subset(data, Date > as.Date(since))
     qplot(Day.Length[1:length(Day.Length)-1], data=sub.wt,
                              geom=c("density"), xlab="Day Length (h)", na.rm=T)
@@ -67,6 +68,6 @@ plot.daylength <- function(since="1900-01-01", data=wt) {
 
 # one function to rule them all
 show.data <- function(since="1900-01-01", span=0.3) {
-    wt <- read.data(file="weight.tsv")
+    wt <- read.data(file=DATAFILE)
     plot.mydata(since, wt, span)
 }

@@ -34,19 +34,29 @@ DATAPATH = './data.tsv'
 
 
 def convert_time_string(timestring):
-    """Parse a time value from the data file."""
-    if timestring == 'NA':
-        rval = NaN
-    else:
-        hour, minute = map(int, timestring.split(':'))
-        rval = hour + minute/60
+    """Take a time string from the Wake column, return number of hours since
+    midnight as a float.
+    """
+    hour, minute = map(int, timestring.split(':'))
+    rval = hour + minute/60
     return rval
+
+
+def convert_time_col(timestrings):
+    """Convert the Wake column (strings) to number of hours since midnight
+    (floats).
+    """
+    idx = timestrings.notnull()
+    timestrings[idx] = timestrings[idx].apply(convert_time_string)
+    return timestrings
 
 
 def read_data(path=DATAPATH):
     """Parse the data."""
-    return read_table(path, header=1, index_col=0, parse_dates=True,
-            converters={'Wake': convert_time_string})
+    dta = read_table(path, header=1, index_col=0, parse_dates=True,
+            skiprows=[0])
+    dta.Wake = convert_time_col(dta.Wake)
+    return dta.convert_objects()
 
 
 def show_data(start=0, path=DATAPATH, floaters=True, floatstyle='.',

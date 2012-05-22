@@ -122,7 +122,7 @@ def show_data(start=0, path=DATAPATH, floaters=True, floatstyle='.',
     axs[1].set_ylabel('% Body Fat')
 
     axs[0].set_title('Life Data')
-    fig.text(0.5, 0.05, 'wt: %.1f    bf: %.1f'%(weight_avg[-1], bf_avg[-1]),
+    fig.text(0.5, 0.05, 'current  wt: %.1f  bf: %.1f'%(weight_avg[-1], bf_avg[-1]),
             horizontalalignment='center', verticalalignment='bottom')
     #print "Weight est: %4.1f lbs"%(weight_avg[-1],)
     #print "    BF est: %4.1f%%"%(bf_avg[-1],)

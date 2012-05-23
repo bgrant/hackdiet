@@ -140,6 +140,10 @@ def show_data(start=0, path=DATAPATH, floaters=True, floatstyle='.',
     for ax in axs:
         ax.tick_params(axis='y', labelleft='on', labelright='on')
 
+    # give a little space on the right so we can see the latest point
+    xlims = axs[2].get_xlim()
+    axs[2].set_xlim((xlims[0], xlims[1]+1))
+
     plt.show()
 
 

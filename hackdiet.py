@@ -74,28 +74,31 @@ def show_data(start=0, path=DATAPATH, floaters=True, floatstyle='.',
     `nofloatstyle`: If floaters are not used, pass this style parameter to
                 matplotlib.
     """
-    wakeup_goal = 7  # reference line in Wakeup-time plot
+    #wakeup_goal = 7  # reference line in Wakeup-time plot
     window = 20 # ndays in exponentially-weighted moving average
     fig, axs = plt.subplots(nrows=3, sharex=True)
 
     data = read_data(path)
 
     # Wakeup-time plot
-    wake_delta = data.Wake - wakeup_goal
+    wake_avg = ewma(data.Wake, window)
+    #wake_delta = data.Wake - wakeup_goal
+    wake_delta = data.Wake - wake_avg
     if floaters:
         axs[2].errorbar(data.index[start:], data.Wake[start:],
                 [wake_delta[start:], zeros(len(data.index))[start:]],
                 ecolor='g', capsize=0, fmt=floatstyle)
-        axs[2].axhline(7, color='r')
+        #axs[2].axhline(7, color='r')
     else:
         data.Wake[start:].plot(ax=axs[2], style=nofloatstyle)
         axs[2].axhline(8, color='r')
         axs[2].axhline(5, color='r')
+    wake_avg[start:].plot(ax=axs[2])
     axs[2].set_ylim((0,24))
     axs[2].set_yticks(arange(1,24,3))
     axs[2].set_yticklabels(map(lambda t: '%02d'%(t,), arange(1,24,3)))
     axs[2].set_ylabel('Wake Time')
-    axs[2].grid(axis='both')
+    #axs[2].grid(axis='both')
 
     # Weight plot
     weight_avg = ewma(data.Weight, window)

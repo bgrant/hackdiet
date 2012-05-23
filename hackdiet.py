@@ -26,14 +26,14 @@ from __future__ import division
 
 import sys
 import matplotlib.pyplot as plt
-from numpy import NaN, arange, zeros
+from numpy import arange, zeros
 from pandas import *
 
 
 DATAPATH = './data.tsv'
 
 
-def convert_time_string(timestring):
+def timestring_to_timefloat(timestring):
     """Take a time string from the Wake column, return number of hours since
     midnight as a float.
     """
@@ -47,8 +47,15 @@ def convert_time_col(timestrings):
     (floats).
     """
     idx = timestrings.notnull()
-    timestrings[idx] = timestrings[idx].apply(convert_time_string)
+    timestrings[idx] = timestrings[idx].apply(timestring_to_timefloat)
     return timestrings
+
+
+def timefloat_to_timestring(timefloat):
+    """Take a 24-hr time represented as a float and return the HH:MM time."""
+    hour = int(timefloat)
+    minute = int((timefloat - hour) * 60.0)
+    return ('%s:%s') % (hour, minute)
 
 
 def read_data(path=DATAPATH):
@@ -125,10 +132,10 @@ def show_data(start=0, path=DATAPATH, floaters=True, floatstyle='.',
     axs[1].set_ylabel('% Body Fat')
 
     axs[0].set_title('Life Data')
-    fig.text(0.5, 0.05, 'current  wt: %.1f  bf: %.1f'%(weight_avg[-1], bf_avg[-1]),
+    fig.text(0.5, 0.05, 'current  wt: %.1f  bf: %.1f  wake: %s'
+            %(weight_avg[-1], bf_avg[-1],
+                timefloat_to_timestring(wake_avg[-1])),
             horizontalalignment='center', verticalalignment='bottom')
-    #print "Weight est: %4.1f lbs"%(weight_avg[-1],)
-    #print "    BF est: %4.1f%%"%(bf_avg[-1],)
 
     for ax in axs:
         ax.tick_params(axis='y', labelleft='on', labelright='on')

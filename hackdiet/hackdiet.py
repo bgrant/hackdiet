@@ -134,8 +134,8 @@ def plot_data(data, start=None, end=None, floatstyle='g+', window=20,
     ax4.set_xlim(ax2.get_xlim())
     ax4.xaxis_date()
     ax4.set_xticks(data.index[data.Notes.notnull()])
-    ax4.set_xticklabels(data.Notes[data.Notes.notnull()], rotation='vertical',
-                        size='small')
+    ax4.set_xticklabels(data.Notes[data.Notes.notnull()],
+                        rotation='vertical', size='small')
 
     # Put a little space on the right so we can see the latest point
     xlims = axs[-1].get_xlim()

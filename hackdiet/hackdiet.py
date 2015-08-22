@@ -157,7 +157,7 @@ def plot_data(data, start=None, end=None, floatstyle='g+', window=20,
                                      timefloat_to_timestring(averages.Wake[-1]),
                                      timefloat_to_timestring(wake_change)))
 
-    plt.subplots_adjust(hspace=0.00, bottom=0.10, left=0.10, right=0.90)
+    plt.subplots_adjust(hspace=0.00, top=0.85, bottom=0.10, left=0.10, right=0.90)
     plt.show()
 
 

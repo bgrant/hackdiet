@@ -98,7 +98,6 @@ def plot_data(data, start=None, end=None, floatstyle='g+', window=20,
         plot_lollipops(data.index, data.Weight, averages.Weight, ax0)
     ax0.set_ylabel('Weight')
     plt.setp(ax0.get_xticklabels(), visible=False)
-    #ax0.axhline(145)
 
     ax1 = fig.add_subplot(4, 1, 2, sharex=ax0)
     data.BF.plot(ax=ax1, **plot_kwargs)
@@ -108,7 +107,6 @@ def plot_data(data, start=None, end=None, floatstyle='g+', window=20,
     ax1.set_ylabel('% Body Fat')
     ax1.set_yticks(ax1.get_yticks()[:-1])
     plt.setp(ax1.get_xticklabels(), visible=False)
-    #ax1.axhline(7)
 
     ax2 = fig.add_subplot(4, 1, 3, sharex=ax0)
     data.Wake.plot(ax=ax2, **plot_kwargs)
@@ -116,11 +114,7 @@ def plot_data(data, start=None, end=None, floatstyle='g+', window=20,
     if lollipops:
         plot_lollipops(data.index, data.Wake, averages.Wake, ax2)
     ax2.set_ylabel('Wake Time')
-    #yrange = range(6, 19, 3)
-    #ax2.set_yticks(yrange)
     ax2.set_yticks(ax2.get_yticks()[:-1])
-    #ax2.set_yticklabels(map(lambda t: '{:02d}'.format(t), yrange))
-    #ax2.axhline(7)
 
     ax3 = fig.add_subplot(4, 1, 4, sharex=ax0)
     data.Waist.plot(ax=ax3, **plot_kwargs)
@@ -128,11 +122,7 @@ def plot_data(data, start=None, end=None, floatstyle='g+', window=20,
     if lollipops:
         plot_lollipops(data.index, data.Waist, averages.Waist, ax3)
     ax3.set_ylabel('Waist (in)')
-    #yrange = range(6, 19, 3)
-    #ax2.set_yticks(yrange)
     ax3.set_yticks(ax3.get_yticks()[:-1])
-    #ax2.set_yticklabels(map(lambda t: '{:02d}'.format(t), yrange))
-    #ax2.axhline(7)
 
     # Plot annotations
     axs = ax0, ax1, ax2, ax3

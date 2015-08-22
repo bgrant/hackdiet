@@ -1,4 +1,4 @@
-HACKDIET - In R and Python
+hackdiet
 ========
 
 Summary
@@ -22,12 +22,6 @@ Weight and the 'Rung' you're on in his workout program.  I happened to
 want to track different variables, and I wanted to be able to play
 around with the data analysis myself.
 
-This project contains two files: `hackdiet.R` and `hackdiet.py`.  They
-have basically the same functionality.  The R file came first, and I
-still quite like the plots produced by R and ggplot2.  However, I do
-most of my programming in python, and I wanted to play with the `pandas`
-package (and `statsmodels` in the future), so I rewrote it in python.
-
 The main output of both files is a three-paneled plot, plotting Weight,
 % Body Fat, and Wakeup-time by Date.  The python version duplicates
 Walker's exponentially-weighted-moving-average and floaters-and-sinkers
@@ -38,8 +32,7 @@ subsequent wakeup-times.
 
 Requirements
 ------------
-`hackdiet.py` requires `numpy`, `matplotlib`, and `pandas`, and
-`hackdiet.R` requires ggplot2.
+`hackdiet.py` requires `numpy`, `matplotlib`, and `pandas`.
 
 My functions assume a data file (by default called `data.tsv`) of the
 form::
@@ -60,26 +53,19 @@ ggplot2 will generally handle it.
 
 Basic Usage
 -----------
-I usually run these files from their respective REPLs (I like RStudio
-and ipython).  The top-level functions in `hackdiet.R` are
-`plot.daylength` and `plot.data`.  In `hackdiet.py`, they are
+I usually use hackdiet from ipython.  In `hackdiet.py`, the entry points are
 `show_data` and `summarize`.
 
 The python version has a basic command line interface
 that interprets a single command-line argument as an offset for the
-range of data to be plotted.  E.g.
+range of data to be plotted.  For example::
 
->>> ./hackdiet.py -30
+    >>> ./hackdiet.py -30
 
-plots data for the last 30 days.
+plots data for the last 30 days, and::
 
->>> ./hackdiet.py 360
+    >>> ./hackdiet.py 360
 
 plots all data except for the first 360 days.  If plotting all the data
 it doesn't put points on the floaters (it looks too cluttered).  Else,
 it does.
-
-For specific functionality and usage, check out the comments and
-docstrings in the files or send me a message on github.
-
-Happy hacking.

@@ -166,13 +166,16 @@ def plot_data(data, start=None, end=None, floatstyle='g+', window=20,
 
     ax0.set_xlabel('')
     ax1.set_xlabel('')
-    ax2.set_xlabel(fmt_string.format(averages.Weight[-1], weight_change,
-                                     averages.BF[-1], bf_change,
-                                     timefloat_to_timestring(averages.Wake[-1]),
-                                     timefloat_to_timestring(wake_change)))
+    progress = fmt_string.format(averages.Weight[-1], weight_change,
+                                 averages.BF[-1], bf_change,
+                                 timefloat_to_timestring(averages.Wake[-1]),
+                                 timefloat_to_timestring(wake_change))
+    ax2.set_xlabel(progress)
 
     plt.subplots_adjust(hspace=0.00, top=0.85, bottom=0.10, left=0.10, right=0.90)
     plt.show()
+
+    return progress
 
 
 def summarize(start='1900-01-01', end=''):

@@ -54,6 +54,7 @@ def timefloat_to_timestring(timefloat):
 def read_data(path):
     """Parse the data."""
     return read_csv(path, index_col=0, parse_dates=True,
+                    comment='#',
                     converters={'Wake': timestring_to_timefloat})
 
 

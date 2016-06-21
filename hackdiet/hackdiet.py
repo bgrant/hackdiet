@@ -24,7 +24,7 @@ from __future__ import print_function, division
 import sys
 import matplotlib.pyplot as plt
 from numpy import zeros, NaN
-from pandas import read_csv, ewma, Series
+from pandas import read_csv, Series, ewma
 
 
 def timestring_to_timefloat(timestring):
@@ -96,7 +96,8 @@ def plot_data(data, start=None, end=None, floatstyle='g+', window=20,
         processed_data = data[cols].apply(Series.interpolate)
     else:
         processed_data = data[cols]
-    averages = ewma(processed_data, span=window)
+    averages = processed_data.ewm(ignore_na=False, span=window, adjust=True,
+                                  min_periods=0).mean()
     averages = averages[start:end]
     data = data[start:end]
 

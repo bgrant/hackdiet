@@ -40,7 +40,7 @@ Input
 Assumes a CSV file of the form:
 
 ```
-Date,Wake,Weight,BF,Waist,Notes
+Date,Weight,BF,Wake,Waist,Notes
 2009-07-18,169.8,22.6,09:01,30,Birthday
 2009-07-19,172.4,23.5,14:31,32,
 2009-07-20,170.2,23.2,14:38,34,
